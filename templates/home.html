@@ -24,38 +24,66 @@
         <div class=section>
             <form action="/input-info.php">
                 <div class=float-left>
+
+                    <!-- pattern name inserted here will appear as the heading of the output file -->
                     <label for="pattern-title">Pattern Name:</label>
                     <input type="text" id="pattern-title" name="pattern-title">
-                </div>
-                <div class=float-right>
 
-                    <!-- selection for needle size here (more options later) -->
+                    <!-- selection for needle size here -->
                     <label for="needle-size">Needle Size:</label>
                     <select id="needle-size" name="needle-size">
                         <option value="none" selected disabled hidden>Select an Option</option>
                         <option value="1">US 1 (2.25 mm)</option>
+                        <option value="1.5">US 1.5 (2.5 mm)</option>
                         <option value="2">US 2 (2.75 mm)</option>
+                        <option value="2.5">US 2.5 (3.0 mm)</option>
                         <option value="3">US 3 (3.25 mm)</option>
-                        <option value="4">US 4 (mm)</option>
+                        <option value="4">US 4 (3.5 mm)</option>
+                        <option value="5">US 5 (3.75 mm)</option>
+                        <option value="6">US 6 (4.0 mm)</option>
+                        <option value="7">US 7 (4.5 mm)</option>
+                        <option value="8">US 8 (5.0 mm)</option>
+                        <option value="9">US 9 (5.5 mm)</option>
+                        <option value="10">US 10 (6.0 mm)</option>
+                        <option value="10.5">US 10.5 (6.5 mm)</option>
+                        <option value="11">US 11 (8.0 mm)</option>
+                        <option value="13">US 13 (9.0 mm)</option>
+                        <option value="15">US 15 (10.0 mm)</option>
+                        <option value="17">US 17 (12.5 mm)</option>
+                    </select>
+
+                    <!-- selection for yarn weight here -->
+                    <label for="yarn-weight">Needle Size:</label>
+                    <select id="yarn-weight" name="yarn-weight">
+                        <option value="none" selected disabled hidden>Select an Option</option>
+                        <option value="0">Lace (0)</option>
+                        <option value="1">Super Fine (1)</option>
+                        <option value="2">Fine (2)</option>
+                        <option value="3">Light (3)</option>
+                        <option value="4">Medium (4)</option>
+                        <option value="5">Bulky (5)</option>
+                        <option value="6">Super Bulky (6)</option>
+                        <option value="7">Jumbo (7)</option>
                     </select>
                 </div>
+
+                <div class=float-right>
+                    
+                </div>
+
+                <!-- spacer -->
+                <div>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</div>
+
+                <div>
+                        <!-- to do:
+                        - drawing implementation
+                            - draw, erase, undo
+                            - save image for processing -->
+                    implementation of drawing functionality will go here
+                </div>
+
             </form>
         </div>
-
-
-         <!-- this is just a spacer--figure out how to do this more efficiently -->
-         <div> &nbsp; </div> 
-         
-         
-
-        <div class=section>
-                <!-- to do:
-                - drawing implementation
-                    - draw, erase, undo
-                    - save image for processing -->
-            implementation of drawing functionality will go here
-        </div>
-
 
 
     </body>
