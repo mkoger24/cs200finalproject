@@ -44,3 +44,13 @@
     width: 46.9%;
     float: right;
 }
+
+.float-left{
+    float: left;
+    padding: 5px;
+}
+
+.float-right{
+    float: right;
+    padding: 5px;
+}

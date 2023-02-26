@@ -21,20 +21,25 @@
 
 
         
-        <div class=section-left>
+        <div class=section>
             <form action="/input-info.php">
-                <label for="pattern-title">Pattern Name:</label>
-                <input type="text" id="pattern-title" name="pattern-title">
+                <div class=float-left>
+                    <label for="pattern-title">Pattern Name:</label>
+                    <input type="text" id="pattern-title" name="pattern-title">
+                </div>
+                <div class=float-right>
+
+                    <!-- selection for needle size here (more options later) -->
+                    <label for="needle-size">Needle Size:</label>
+                    <select id="needle-size" name="needle-size">
+                        <option value="none" selected disabled hidden>Select an Option</option>
+                        <option value="1">US 1 (2.25 mm)</option>
+                        <option value="2">US 2 (2.75 mm)</option>
+                        <option value="3">US 3 (3.25 mm)</option>
+                        <option value="4">US 4 (mm)</option>
+                    </select>
+                </div>
             </form>
-        </div>
-
-
-
-        <div class=section-right>
-                <!-- to do:
-                - drop-down menus for selecting relevant gauge information
-                    - needle size, yarn weight, 20x20 swatch size measaurement -->
-            gauge input goes here
         </div>
 
 
