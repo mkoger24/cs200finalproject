@@ -1,7 +1,18 @@
 .header{
-    background-color: #8d8383;
+    background-color: #ece5e5;
     padding: 20px;
     font-size: 10px;
     text-align: center;
-    color:rgb(65, 63, 71);
+    color:rgb(0, 0, 0);
+}
+
+.section{
+    background-color: #ffffff;
+    padding: 20px;
+    font-size: 10px;
+    text-align: center;
+    color:rgb(0, 0, 0);
+    border: #000000;
+    border-radius: 2px;
+    border-style: solid;
 }
