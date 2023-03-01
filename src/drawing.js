@@ -1,97 +1,46 @@
-const fileInput = document.querySelector("#upload");
+var canvas = document.getElementById("draw");
 
-// enabling drawing on the blank canvas
-drawOnImage();
+var ctx = canvas.getContext("2d");
+resize();
 
-fileInput.addEventListener("change", async (e) => {
-  const [file] = fileInput.files;
-
-  // displaying the uploaded image
-  const image = document.createElement("img");
-  image.src = await fileToDataUri(file);
-
-  // enbaling the brush after after the image
-  // has been uploaded
-  image.addEventListener("load", () => {
-    drawOnImage(image);
-  });
-
-  return false;
-});
-
-function fileToDataUri(field) {
-  return new Promise((resolve) => {
-    const reader = new FileReader();
-
-    reader.addEventListener("load", () => {
-      resolve(reader.result);
-    });
-
-    reader.readAsDataURL(field);
-  });
+// resize canvas when window is resized
+function resize() {
+  ctx.canvas.width = window.innerWidth;
+  ctx.canvas.height = window.innerHeight;
 }
 
-const sizeElement = document.querySelector("#sizeRange");
-let size = sizeElement.value;
-sizeElement.oninput = (e) => {
-  size = e.target.value;
-};
+// initialize position as 0,0
+var pos = { x: 0, y: 0 };
 
-const colorElement = document.getElementsByName("colorRadio");
-let color;
-colorElement.forEach((c) => {
-  if (c.checked) color = c.value;
-});
-
-colorElement.forEach((c) => {
-  c.onclick = () => {
-    color = c.value;
-  };
-});
-
-function drawOnImage(image = null) {
-  const canvasElement = document.getElementById("canvas");
-  const context = canvasElement.getContext("2d");
-
-  // if an image is present,
-  // the image passed as a parameter is drawn in the canvas
-  if (image) {
-    const imageWidth = image.width;
-    const imageHeight = image.height;
-
-    // rescaling the canvas element
-    canvasElement.width = imageWidth;
-    canvasElement.height = imageHeight;
-
-    context.drawImage(image, 0, 0, imageWidth, imageHeight);
-  }
-
-  const clearElement = document.getElementById("clear");
-  clearElement.onclick = () => {
-    context.clearRect(0, 0, canvasElement.width, canvasElement.height);
-  };
-
-  let isDrawing;
-
-  canvasElement.onmousedown = (e) => {
-    isDrawing = true;
-    context.beginPath();
-    context.lineWidth = size;
-    context.strokeStyle = color;
-    context.lineJoin = "round";
-    context.lineCap = "round";
-    context.moveTo(e.clientX, e.clientY);
-  };
-
-  canvasElement.onmousemove = (e) => {
-    if (isDrawing) {
-      context.lineTo(e.clientX, e.clientY);
-      context.stroke();
-    }
-  };
-
-  canvasElement.onmouseup = function () {
-    isDrawing = false;
-    context.closePath();
-  };
+// new position from mouse events
+function setPosition(e) {
+  pos.x = e.clientX;
+  pos.y = e.clientY;
 }
+
+function draw(e) {
+  if (e.buttons !== 1) return; // if mouse is not clicked, do not go further
+
+  var color = document.getElementById("hex").value;
+
+  ctx.beginPath(); // begin the drawing path
+
+  ctx.lineWidth = 20; // width of line
+  ctx.lineCap = "round"; // rounded end cap
+  ctx.strokeStyle = color; // hex color of line
+
+  ctx.moveTo(pos.x, pos.y); // from position
+  setPosition(e);
+  ctx.lineTo(pos.x, pos.y); // to position
+
+  ctx.stroke(); // draw it!
+}
+
+
+// add window event listener to trigger when window is resized
+window.addEventListener("resize", resize);
+
+// add event listeners to trigger on different mouse events
+document.addEventListener("mousemove", draw);
+document.addEventListener("mousedown", setPosition);
+document.addEventListener("mouseenter", setPosition);
