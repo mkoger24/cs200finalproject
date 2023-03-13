@@ -7,6 +7,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content=
                 "width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css'>
         
         <style>
             * {
@@ -101,7 +103,7 @@
 
                 <!-- spacer -->
                 <div>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</div>
-                <div>
+                <!-- <div>
                     <canvas
                       id="canvas"
                       width="1370"
@@ -143,8 +145,15 @@
 
                 <div class=float-right>
                     <input type="submit" value="Create Pattern" style="background-color: white">
-                </div>
+                </div> -->
 
+                <h1>HTML Canvas</h1>
+                <p>Draw something</p>
+                <canvas id="theCanvas"></canvas>
+                <div>
+                    <button id="clearButton">Clear</button>
+                </div>
+                <script src="js/index.js"></script>
 
                 
                 &nbsp;
@@ -152,5 +161,91 @@
         </div>
 
     </body>
+
+<!-- source: https://codepen.io/zxlee618/pen/XPVKvg -->
+
+    <body translate="no" data-new-gr-c-s-check-loaded="14.1100.0" data-gr-ext-installed="">
+        <h1>HTML Canvas</h1>
+      <p>Draw something</p> 
+      <canvas id="theCanvas" width="800" height="800"></canvas>
+      <div>
+        <button id="clearButton">Clear</button>
+      </div>
+          <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+      
+        
+            <script id="rendered-js">
+      const MAIN_MOUSE_BUTTON = 0;
+      
+      function prepareContext(canvasElement) {
+        let dpr = window.devicePixelRatio || 1;
+        let rect = canvasElement.getBoundingClientRect();
+        canvasElement.width = rect.width * dpr;
+        canvasElement.height = rect.height * dpr;
+      
+        let context = canvasElement.getContext("2d");
+        context.scale(dpr, dpr);
+      
+        return context;
+      }
+      
+      function setLineProperties(context) {
+        context.lineWidth = 4;
+        context.lineJoin = "round";
+        context.lineCap = "round";
+        return context;
+      }
+      
+      let clearButton = document.getElementById("clearButton");
+      let theCanvas = document.getElementById("theCanvas");
+      let theContext = prepareContext(theCanvas);
+      let shouldDraw = false;
+      
+      theCanvas.addEventListener("mousedown", start);
+      theCanvas.addEventListener("mouseup", end);
+      theCanvas.addEventListener("mousemove", move, false);
+      
+      clearButton.addEventListener("click", event => {
+        clearCanvas(theContext);
+      });
+      
+      
+      function clearCanvas(context) {
+        context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+      }
+      
+      function start(event) {
+        if (event.button === MAIN_MOUSE_BUTTON) {
+          shouldDraw = true;
+          setLineProperties(theContext);
+      
+          theContext.beginPath();
+      
+          let elementRect = event.target.getBoundingClientRect();
+          theContext.moveTo(event.clientX - elementRect.left, event.clientY - elementRect.top);
+        }
+      }
+      
+      function end(event) {
+        if (event.button === MAIN_MOUSE_BUTTON) {
+          shouldDraw = false;
+        }
+      }
+      
+      function move(event) {
+        if (shouldDraw) {
+          let elementRect = event.target.getBoundingClientRect();
+          theContext.lineTo(event.clientX - elementRect.left, event.clientY - elementRect.top);
+          theContext.stroke();
+        }
+      }
+      //# sourceURL=pen.js
+          </script>
+      
+<!-- end cited code from: https://codepen.io/zxlee618/pen/XPVKvg -->
+      
+      
+       
+      </body>
 
 </html>
