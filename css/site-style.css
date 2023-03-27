@@ -56,6 +56,10 @@
     padding: 5px;
 }
 
+
+/* source: https://codepen.io/zxlee618/pen/XPVKvg */
+
+
 #theCanvas {
     height: 400px;
     width: 1000px;
@@ -80,3 +84,5 @@
   body {
     background: #eee;
   }
+
+  /* end sourced code from: https://codepen.io/zxlee618/pen/XPVKvg */
