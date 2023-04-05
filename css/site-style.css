@@ -63,8 +63,8 @@
 #theCanvas {
     height: 400px;
     width: 1000px;
-    /* background: rgb(204, 180, 180); */
-    /* grid functionality from: https://codepen.io/jasonadelia/pen/DeYMoy */
+
+    /* grid functionality from: https://codepen.io/jasonadelia/pen/DeYMoy (with colors edited)*/
     background-color: transparent;
     background-image:linear-gradient(#000000, #000000);
     background-image:linear-gradient(0deg, transparent 24%, 
