@@ -5,10 +5,6 @@
         <title>Pattern Maker</title>
         <link rel="stylesheet" href="css/site-style.css">
 
-        <!-- pyscript -->
-        <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-        <script defer src="https://pyscript.net/latest/pyscript.js"></script>
-
         <meta charset="UTF-8">
         <meta name="viewport" content=
                 "width=device-width, initial-scale=1.0">
@@ -25,6 +21,67 @@
 
     <body translate="no" data-new-gr-c-s-check-loaded="14.1100.0" data-gr-ext-installed="">
 
+
+        <!-- function definitions -->
+
+        <script>
+
+            // still working on this -- functionality for getting the user's input from the canvas
+            function takeScreenshot() {
+                var screenshot = document.documentElement
+                    .cloneNode(true);
+                screenshot.style.pointerEvents = 'none';
+                screenshot.style.overflow = 'hidden';
+                screenshot.style.webkitUserSelect = 'none';
+                screenshot.style.mozUserSelect = 'none';
+                screenshot.style.msUserSelect = 'none';
+                screenshot.style.oUserSelect = 'none';
+                screenshot.style.userSelect = 'none';
+                screenshot.dataset.scrollX = window.scrollX;
+                screenshot.dataset.scrollY = window.scrollY;
+                var blob = new Blob([screenshot.outerHTML], {
+                    type: 'text/html'
+                });
+                return blob;
+            }
+            function generate() {
+                window.URL = window.URL || window.webkitURL;
+                window.open(window.URL
+                    .createObjectURL(takeScreenshot()));
+            }
+
+
+            // creating a .txt file
+            function createTxt() {
+                var fso = new ActiveXObject("Scripting.FileSystemObject");
+                var a = fso.CreateTextFile("./templates/patterns/output.pdf", true);
+                a.WriteLine("This is a test.");
+                a.WriteLine(patternTitle);
+                a.Close();
+            }
+
+            // converting a .txt file to a .pdf file
+            function convertFile() {
+
+            }
+
+            // image processing to create the pattern
+            function createPattern() {
+                createTxt();
+                // convertFile()
+
+            }
+            </script>
+
+
+
+
+
+
+
+
+
+
         <div class=header>
                 <!-- to do:
                 - make a logo to put here
@@ -39,18 +96,18 @@
 
         
         <div class=section>
-            <form action="/download" target="_blank" method="post">
+            <form action="createPattern()"target="_blank" method="post">
                 <div class=float-left>
 
                     <!-- pattern name inserted here will appear as the heading of the output file -->
-                    <label for="pattern-title">Pattern Name:</label>
-                    <input type="text" id="pattern-title" name="pattern-title">
+                    <label for="patternTitle">Pattern Name:</label>
+                    <input type="text" id="patternTitle" name="patternTitle">
 
                     &nbsp;
 
                     <!-- selection for needle size here -->
-                    <label for="needle-size">Needle Size:</label>
-                    <select id="needle-size" name="needle-size">
+                    <label for="needleSize">Needle Size:</label>
+                    <select id="needleSize" name="needleSize">
                         <option value="none" selected disabled hidden>Select an Option</option>
                         <option value="1">US 1 (2.25 mm)</option>
                         <option value="1.5">US 1.5 (2.5 mm)</option>
@@ -74,8 +131,8 @@
                     &nbsp;
 
                     <!-- selection for yarn weight here -->
-                    <label for="yarn-weight">Yarn Weight:</label>
-                    <select id="yarn-weight" name="yarn-weight">
+                    <label for="yarnWeight">Yarn Weight:</label>
+                    <select id="yarnWeight" name="yarnWeight">
                         <option value="none" selected disabled hidden>Select an Option</option>
                         <option value="0">Lace (0)</option>
                         <option value="1">Super Fine (1)</option>
@@ -97,11 +154,11 @@
                         Knit a 20 stitch x 20 row swatch with desired yarn and needles and record the size of that swatch here:
                     </div>
 
-                    <label for="stitches-per-inch">Width:</label>
-                    <input type="number" min="0" step=".01" id="stitches-per-inch" name="stitches-per-inch">
+                    <label for="stitchesPerInch">Width:</label>
+                    <input type="number" min="0" step=".01" id="stitchesPerInch" name="stitchesPerInch">
 
-                    <label for="rows-per-inch">Height:</label>
-                    <input type="number" min="0" step=".01" id="rows-per-inch" name="rows-per-inch">
+                    <label for="rowsPerInch">Height:</label>
+                    <input type="number" min="0" step=".01" id="rowsPerInch" name="rowsPerInch">
                 </div>
 
                 <!-- spacer -->
@@ -109,6 +166,7 @@
       
                 &nbsp;
 
+                <button onclick="createTxt()" href="home.html">.txt file function</button>
 
                 <!-- source: https://codepen.io/zxlee618/pen/XPVKvg -->
 
@@ -119,10 +177,9 @@
                 <div>
                     <button id="clearButton">Clear</button>
                 </div>
-                    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+                <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
                 
-                    
-                        <script id="rendered-js">
+                    <script id="rendered-js">
                 const MAIN_MOUSE_BUTTON = 0;
                 
                 function prepareContext(canvasElement) {
@@ -192,39 +249,12 @@
                 
             <!-- end cited code from: https://codepen.io/zxlee618/pen/XPVKvg -->
 
-            <button onclick="generate()">take screenshot</button>
+            <button onclick="createTxt(patternTitle,needleSize,yarnWeight,stitchesPerInch,rowsPerInch)">take screenshot</button>
 
-            <script>
-            function takeScreenshot() {
-                var screenshot = document.documentElement
-                    .cloneNode(true);
-                screenshot.style.pointerEvents = 'none';
-                screenshot.style.overflow = 'hidden';
-                screenshot.style.webkitUserSelect = 'none';
-                screenshot.style.mozUserSelect = 'none';
-                screenshot.style.msUserSelect = 'none';
-                screenshot.style.oUserSelect = 'none';
-                screenshot.style.userSelect = 'none';
-                screenshot.dataset.scrollX = window.scrollX;
-                screenshot.dataset.scrollY = window.scrollY;
-                var blob = new Blob([screenshot.outerHTML], {
-                    type: 'text/html'
-                });
-                return blob;
-            }
 
-            function generate() {
-                window.URL = window.URL || window.webkitURL;
-                window.open(window.URL
-                    .createObjectURL(takeScreenshot()));
-            }
-            </script>
+            <!-- <a href="/download">download</a> -->
 
-            <a href="/download">download</a>
-
-            <py-script>
-                print("hello world")
-            </py-script>
+            
 
             <input type="submit" value="Submit">
 
