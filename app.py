@@ -13,8 +13,20 @@ def input():
 
 @app.route('/download', methods=['GET', 'POST'])
 def downloadFile ():
+    title = request.form["patternTitle"]
+    needle = request.form["needleSize"]
+    weight = request.form["yarnWeight"]
     with open('templates/patternpdfs/output.txt', 'w') as outputFile:
-        outputFile.write('Create a new text file!')
+        outputFile.write(title)
+        outputFile.write("\nNeedle Size: ")
+        outputFile.write(needle)
+        outputFile.write("\nYarn Weight: ")
+        outputFile.write(weight)
+        outputFile.write("\n")
+
+
+    
+
     path = "./templates/patternpdfs/output.txt"
     return send_file(path, as_attachment=True)
 
