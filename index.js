@@ -63,3 +63,21 @@ function move(event) {
     theContext.stroke();
   }
 }
+
+function downloadCanvasAsImage() {
+  // Get the canvas element by its ID
+  const canvas = document.getElementById('theCanvas');
+
+  // Convert the canvas content to a data URL
+  const dataURL = canvas.toDataURL('image/png');
+
+  // Create a temporary anchor element to download the image
+  const tempLink = document.createElement('a');
+  tempLink.href = dataURL;
+  tempLink.download = 'canvas-image.png';
+
+  // Append the link to the document, trigger the download, and remove the link
+  document.body.appendChild(tempLink);
+  tempLink.click();
+  document.body.removeChild(tempLink);
+}

@@ -16,6 +16,7 @@ def downloadFile ():
     title = request.form["patternTitle"]
     needle = request.form["needleSize"]
     weight = request.form["yarnWeight"]
+    request.form[downloadImage]
     with open('templates/patternpdfs/output.txt', 'w') as outputFile:
         outputFile.write(title)
         outputFile.write("\nNeedle Size: ")
@@ -25,7 +26,6 @@ def downloadFile ():
         outputFile.write("\n")
 
 
-    
 
     path = "./templates/patternpdfs/output.txt"
     return send_file(path, as_attachment=True)

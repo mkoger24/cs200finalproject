@@ -51,25 +51,9 @@
             }
 
 
-            // creating a .txt file
-            function createTxt() {
-                var fso = new ActiveXObject("Scripting.FileSystemObject");
-                var a = fso.CreateTextFile("./templates/patterns/output.pdf", true);
-                a.WriteLine("This is a test.");
-                a.WriteLine(patternTitle);
-                a.Close();
-            }
-
-            // converting a .txt file to a .pdf file
-            function convertFile() {
-
-            }
-
             // image processing to create the pattern
             function createPattern() {
-                createTxt();
-                // convertFile()
-
+                downloadCanvasAsImage();
             }
             </script>
 
@@ -137,7 +121,7 @@
                         <option value="Lace (0)">Lace (0)</option>
                         <option value="Suoer Fine (1)">Super Fine (1)</option>
                         <option value="Fine (2)">Fine (2)</option>
-                        <option value="Lighe (3)">Light (3)</option>
+                        <option value="Light (3)">Light (3)</option>
                         <option value="Medium (4)">Medium (4)</option>
                         <option value="Bulky (5)">Bulky (5)</option>
                         <option value="Super Bulky (6)">Super Bulky (6)</option>
@@ -165,8 +149,6 @@
                 <div>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</div>
       
                 &nbsp;
-
-                <button onclick="createTxt()" href="home.html">.txt file function</button>
 
                 <!-- source: https://codepen.io/zxlee618/pen/XPVKvg -->
 
@@ -249,14 +231,14 @@
                 
             <!-- end cited code from: https://codepen.io/zxlee618/pen/XPVKvg -->
 
-            <button onclick="createTxt(patternTitle,needleSize,yarnWeight,stitchesPerInch,rowsPerInch)">take screenshot</button>
+            <!-- <button onclick="createTxt(patternTitle,needleSize,yarnWeight,stitchesPerInch,rowsPerInch)">take screenshot</button> -->
 
 
             <!-- <a href="/download">download</a> -->
 
             
 
-            <input type="submit" value="Submit">
+            <input action="downloadCanvasAsImage()"type="submit" value="Submit">
 
             </form>
         </div>
