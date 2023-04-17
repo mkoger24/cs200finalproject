@@ -52,9 +52,12 @@
 
 
             // image processing to create the pattern
-            function createPattern() {
+            function writePattern() {
                 downloadCanvasAsImage();
+
             }
+
+
             </script>
 
 
@@ -66,7 +69,7 @@
 
 
 
-        <div class=header>
+        <div class=header> 
                 <!-- to do:
                 - make a logo to put here
                 - sign-in option (streach goal! do this last) -->
@@ -80,7 +83,7 @@
 
         
         <div class=section>
-            <form action="/download"target="_blank" method="post">
+            <form onclick="writePattern()" action="/download"target="_blank" method="post">
                 <div class=float-left>
 
                     <!-- pattern name inserted here will appear as the heading of the output file -->
@@ -157,7 +160,7 @@
                 <p>Draw something</p>  -->
                 <canvas id="theCanvas" width="800" height="800"></canvas>
                 <div>
-                    <button id="clearButton">Clear</button>
+                    <button onClick="writePattern()"id="clearButton">download canvas</button>
                 </div>
                 <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
                 
@@ -238,9 +241,11 @@
 
             
 
-            <input action="downloadCanvasAsImage()"type="submit" value="Submit">
+            <input type="submit" value="Submit">
+
 
             </form>
+            <button onclick="writePattern()">writePattern</button>
         </div>
 
     </body>

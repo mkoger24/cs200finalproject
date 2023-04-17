@@ -1,3 +1,4 @@
 gerg
-Needle Size: US 2.5 (3.0 mm)
-Yarn Weight: Suoer Fine (1)
+Needle Size: US 2 (2.75 mm)
+Yarn Weight: Fine (2)
+downloadCanvasAsImage()

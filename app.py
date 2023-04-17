@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, send_file, redirect, abort
 
 app = Flask(__name__, template_folder='templates', static_folder='css')
 
@@ -16,7 +16,7 @@ def downloadFile ():
     title = request.form["patternTitle"]
     needle = request.form["needleSize"]
     weight = request.form["yarnWeight"]
-    request.form[downloadImage]
+
     with open('templates/patternpdfs/output.txt', 'w') as outputFile:
         outputFile.write(title)
         outputFile.write("\nNeedle Size: ")
@@ -24,6 +24,7 @@ def downloadFile ():
         outputFile.write("\nYarn Weight: ")
         outputFile.write(weight)
         outputFile.write("\n")
+        outputFile.write("downloadCanvasAsImage()")
 
 
 
