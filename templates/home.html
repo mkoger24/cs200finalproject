@@ -55,6 +55,10 @@
             function writePattern() {
                 downloadCanvasAsImage();
 
+                fetch("http://localhost:5000/download", {
+        //             method: 'POST',
+        //             headers: {},
+                })
             }
 
 
@@ -83,7 +87,7 @@
 
         
         <div class=section>
-            <form onclick="writePattern()" action="/download"target="_blank" method="post">
+            <form onclick="writePattern()" target="_blank" method="post">
                 <div class=float-left>
 
                     <!-- pattern name inserted here will appear as the heading of the output file -->

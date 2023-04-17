@@ -1,4 +1,4 @@
 gerg
-Needle Size: US 2 (2.75 mm)
+Needle Size: US 2.5 (3.0 mm)
 Yarn Weight: Fine (2)
 downloadCanvasAsImage()

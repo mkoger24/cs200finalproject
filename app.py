@@ -2,16 +2,16 @@ from flask import Flask, render_template, request, send_file, redirect, abort
 
 app = Flask(__name__, template_folder='templates', static_folder='css')
 
-@app.route('/', methods=['GET','POST'])
+@app.route('/', methods=['GET'])
 def home():
     return render_template("home.html")
 
+# @app.route('/', methods=['POST'])
+# def input():
+#     return render_template("input-info.php")
+
+
 @app.route('/', methods=['POST'])
-def input():
-    return render_template("input-info.php")
-
-
-@app.route('/download', methods=['GET', 'POST'])
 def downloadFile ():
     title = request.form["patternTitle"]
     needle = request.form["needleSize"]
