@@ -69,12 +69,12 @@ function downloadCanvasAsImage() {
   const canvas = document.getElementById('theCanvas');
 
   // Convert the canvas content to a data URL
-  const dataURL = canvas.toDataURL('image/png');
+  const dataURL = canvas.toDataURL('image/pdf');
 
   // Create a temporary anchor element to download the image
   const tempLink = document.createElement('a');
   tempLink.href = dataURL;
-  tempLink.download = '/templates/patternpdfs/canvas-image.png';
+  tempLink.download = '/templates/patternpdfs/canvas-image.pdf';
 
   // Append the link to the document, trigger the download, and remove the link
   document.body.appendChild(tempLink);

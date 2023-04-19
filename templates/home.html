@@ -51,8 +51,28 @@
             }
 
 
+            function downloadCanvasAsImage() {
+                var title = document.getElementById('patternTitle').value;
+                // Get the canvas element by its ID
+                const canvas = document.getElementById('theCanvas');
+
+                // Convert the canvas content to a data URL
+                const dataURL = canvas.toDataURL('image/png');
+
+                // Create a temporary anchor element to download the image
+                const tempLink = document.createElement('a');
+                tempLink.href = dataURL;
+                tempLink.download = (title + ".png");
+
+                // Append the link to the document, trigger the download, and remove the link
+                document.body.appendChild(tempLink);
+                tempLink.click();
+                document.body.removeChild(tempLink);
+            }
+
             // image processing to create the pattern
             function writePattern() {
+                console.log("Hello");
                 downloadCanvasAsImage();
 
                 fetch("http://localhost:5000/download", {
@@ -87,7 +107,7 @@
 
         
         <div class=section>
-            <form onclick="writePattern()" target="_blank" method="post">
+            <form target="_blank" method="post">
                 <div class=float-left>
 
                     <!-- pattern name inserted here will appear as the heading of the output file -->
@@ -126,7 +146,7 @@
                     <select id="yarnWeight" name="yarnWeight">
                         <option value="none" selected disabled hidden>Select an Option</option>
                         <option value="Lace (0)">Lace (0)</option>
-                        <option value="Suoer Fine (1)">Super Fine (1)</option>
+                        <option value="Super Fine (1)">Super Fine (1)</option>
                         <option value="Fine (2)">Fine (2)</option>
                         <option value="Light (3)">Light (3)</option>
                         <option value="Medium (4)">Medium (4)</option>
@@ -150,6 +170,13 @@
 
                     <label for="rowsPerInch">Height:</label>
                     <input type="number" min="0" step=".01" id="rowsPerInch" name="rowsPerInch">
+
+                    <label for="unitMeasure">Unit of Measurement: </label>
+                    <select id="unitMeasure" name="unitMeasure">
+                        <option value="none" selected disabled hidden>Select an Option</option>
+                        <option value="Inches">Inches</option>
+                        <option value="Centimeters">Centimeters</option>
+                    </select>
                 </div>
 
                 <!-- spacer -->
@@ -245,7 +272,7 @@
 
             
 
-            <input type="submit" value="Submit">
+            <input onclick="writePattern()" type="submit" value="Submit">
 
 
             </form>
