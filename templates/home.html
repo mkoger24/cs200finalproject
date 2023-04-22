@@ -24,66 +24,6 @@
 
         <!-- function definitions -->
 
-        <script>
-
-            // still working on this -- functionality for getting the user's input from the canvas
-            function takeScreenshot() {
-                var screenshot = document.documentElement
-                    .cloneNode(true);
-                screenshot.style.pointerEvents = 'none';
-                screenshot.style.overflow = 'hidden';
-                screenshot.style.webkitUserSelect = 'none';
-                screenshot.style.mozUserSelect = 'none';
-                screenshot.style.msUserSelect = 'none';
-                screenshot.style.oUserSelect = 'none';
-                screenshot.style.userSelect = 'none';
-                screenshot.dataset.scrollX = window.scrollX;
-                screenshot.dataset.scrollY = window.scrollY;
-                var blob = new Blob([screenshot.outerHTML], {
-                    type: 'text/html'
-                });
-                return blob;
-            }
-            function generate() {
-                window.URL = window.URL || window.webkitURL;
-                window.open(window.URL
-                    .createObjectURL(takeScreenshot()));
-            }
-
-
-            function downloadCanvasAsImage() {
-                var title = document.getElementById('patternTitle').value;
-                // Get the canvas element by its ID
-                const canvas = document.getElementById('theCanvas');
-
-                // Convert the canvas content to a data URL
-                const dataURL = canvas.toDataURL('image/png');
-
-                // Create a temporary anchor element to download the image
-                const tempLink = document.createElement('a');
-                tempLink.href = dataURL;
-                tempLink.download = (title + ".png");
-
-                // Append the link to the document, trigger the download, and remove the link
-                document.body.appendChild(tempLink);
-                tempLink.click();
-                document.body.removeChild(tempLink);
-            }
-
-            // image processing to create the pattern
-            function writePattern() {
-                console.log("Hello");
-                downloadCanvasAsImage();
-
-                fetch("http://localhost:5000/download", {
-        //             method: 'POST',
-        //             headers: {},
-                })
-            }
-
-
-            </script>
-
 
 
 
@@ -189,94 +129,122 @@
                 <!-- <body translate="no" data-new-gr-c-s-check-loaded="14.1100.0" data-gr-ext-installed="">  (moved to line 21)-->
                     <!-- <h1>HTML Canvas</h1>
                 <p>Draw something</p>  -->
-                <canvas id="theCanvas" width="800" height="800"></canvas>
-                <div>
-                    <button onClick="writePattern()"id="clearButton">download canvas</button>
-                </div>
+                <canvas id="theCanvas" width="800" height="800" name="theCanvas"></canvas>
+        
                 <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
                 
-                    <script id="rendered-js">
-                const MAIN_MOUSE_BUTTON = 0;
-                
-                function prepareContext(canvasElement) {
-                    let dpr = window.devicePixelRatio || 1;
-                    let rect = canvasElement.getBoundingClientRect();
-                    canvasElement.width = rect.width * dpr;
-                    canvasElement.height = rect.height * dpr;
-                
-                    let context = canvasElement.getContext("2d");
-                    context.scale(dpr, dpr);
-                
-                    return context;
-                }
-                
-                function setLineProperties(context) {
-                    context.lineWidth = 4;
-                    context.lineJoin = "round";
-                    context.lineCap = "round";
-                    return context;
-                }
-                
-                let clearButton = document.getElementById("clearButton");
-                let theCanvas = document.getElementById("theCanvas");
-                let theContext = prepareContext(theCanvas);
-                let shouldDraw = false;
-                
-                theCanvas.addEventListener("mousedown", start);
-                theCanvas.addEventListener("mouseup", end);
-                theCanvas.addEventListener("mousemove", move, false);
-                
-                clearButton.addEventListener("click", event => {
-                    clearCanvas(theContext);
-                });
-                
-                
-                function clearCanvas(context) {
-                    context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-                }
-                
-                function start(event) {
-                    if (event.button === MAIN_MOUSE_BUTTON) {
-                    shouldDraw = true;
-                    setLineProperties(theContext);
-                
-                    theContext.beginPath();
-                
-                    let elementRect = event.target.getBoundingClientRect();
-                    theContext.moveTo(event.clientX - elementRect.left, event.clientY - elementRect.top);
+                <script id="rendered-js">
+                    const MAIN_MOUSE_BUTTON = 0;
+                    
+                    function prepareContext(canvasElement) {
+                        let dpr = window.devicePixelRatio || 1;
+                        let rect = canvasElement.getBoundingClientRect();
+                        canvasElement.width = rect.width * dpr;
+                        canvasElement.height = rect.height * dpr;
+                    
+                        let context = canvasElement.getContext("2d");
+                        context.scale(dpr, dpr);
+                    
+                        return context;
                     }
-                }
-                
-                function end(event) {
-                    if (event.button === MAIN_MOUSE_BUTTON) {
-                    shouldDraw = false;
+                    
+                    function setLineProperties(context) {
+                        context.lineWidth = 4;
+                        context.lineJoin = "round";
+                        context.lineCap = "round";
+                        return context;
                     }
-                }
-                
-                function move(event) {
-                    if (shouldDraw) {
-                    let elementRect = event.target.getBoundingClientRect();
-                    theContext.lineTo(event.clientX - elementRect.left, event.clientY - elementRect.top);
-                    theContext.stroke();
+                    
+                    let clearButton = document.getElementById("clearButton");
+                    let theCanvas = document.getElementById("theCanvas");
+                    let theContext = prepareContext(theCanvas);
+                    let shouldDraw = false;
+                    
+                    theCanvas.addEventListener("mousedown", start);
+                    theCanvas.addEventListener("mouseup", end);
+                    theCanvas.addEventListener("mousemove", move, false);
+                    
+                    clearButton.addEventListener("click", event => {
+                        clearCanvas(theContext);
+                    });
+                    
+                    
+                    function clearCanvas(context) {
+                        context.clearRect(0, 0, context.canvas.width, context.canvas.height);
                     }
-                }
-                //# sourceURL=pen.js
-                    </script>
+                    
+                    function start(event) {
+                        if (event.button === MAIN_MOUSE_BUTTON) {
+                        shouldDraw = true;
+                        setLineProperties(theContext);
+                    
+                        theContext.beginPath();
+                    
+                        let elementRect = event.target.getBoundingClientRect();
+                        theContext.moveTo(event.clientX - elementRect.left, event.clientY - elementRect.top);
+                        }
+                    }
+                    
+                    function end(event) {
+                        if (event.button === MAIN_MOUSE_BUTTON) {
+                        shouldDraw = false;
+                        }
+                    }
+                    
+                    function move(event) {
+                        if (shouldDraw) {
+                        let elementRect = event.target.getBoundingClientRect();
+                        theContext.lineTo(event.clientX - elementRect.left, event.clientY - elementRect.top);
+                        theContext.stroke();
+                        }
+                    }
+                    //# sourceURL=pen.js
+            </script>
                 
             <!-- end cited code from: https://codepen.io/zxlee618/pen/XPVKvg -->
+
+
+            <script>
+                function downloadCanvasAsImage() {
+                    
+                    // Get the canvas element by its ID
+                    const canvas = document.getElementById('theCanvas');
+    
+                    // Convert the canvas content to a data URL
+                    const dataURL = canvas.toDataURL('image/png');
+    
+                    // Create a temporary anchor element to download the image
+                    const tempLink = document.createElement('a');
+                    tempLink.href = dataURL;
+                    tempLink.download = ("output.png");
+    
+                    // Append the link to the document, trigger the download, and remove the link
+                    document.body.appendChild(tempLink);
+                    tempLink.click();
+                    document.body.removeChild(tempLink);
+    
+                }
+    
+                // image processing to create the pattern
+                function writePattern() {
+                    console.log("Hello");
+                    downloadCanvasAsImage();
+                }
+    
+    
+                </script>
 
             <!-- <button onclick="createTxt(patternTitle,needleSize,yarnWeight,stitchesPerInch,rowsPerInch)">take screenshot</button> -->
 
 
             <!-- <a href="/download">download</a> -->
 
-            
+            <div></div>
 
             <input onclick="writePattern()" type="submit" value="Submit">
 
 
             </form>
-            <button onclick="writePattern()">writePattern</button>
         </div>
 
     </body>

@@ -1,3 +1,5 @@
 flask
 reportlab
 PyPDF2
+Pillow
+numpy
