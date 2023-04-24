@@ -22,28 +22,12 @@
     <body translate="no" data-new-gr-c-s-check-loaded="14.1100.0" data-gr-ext-installed="">
 
 
-        <!-- function definitions -->
-
-
-
-
-
-
-
-
-
-
         <div class=header> 
-                <!-- to do:
-                - make a logo to put here
-                - sign-in option (streach goal! do this last) -->
-            <h1>[Knitting an Algorithm logo here]</h1>
+            <h1>Knitting an Algorithm</h1>
         </div>
 
 
-        <!-- this is just a spacer--figure out how to do this more efficiently -->
         <div> &nbsp; </div>
-
 
         
         <div class=section>
@@ -99,7 +83,7 @@
 
                 &nbsp;
 
-
+                <!-- gauge input goes here -->
                 <div class=float-right>
                     <div style="font-size:small;">
                         Knit a 20 stitch x 20 row swatch with desired yarn and needles and record the size of that swatch here:
@@ -124,11 +108,8 @@
       
                 &nbsp;
 
+                <!-- canvas for drawing -->
                 <!-- source: https://codepen.io/zxlee618/pen/XPVKvg -->
-
-                <!-- <body translate="no" data-new-gr-c-s-check-loaded="14.1100.0" data-gr-ext-installed="">  (moved to line 21)-->
-                    <!-- <h1>HTML Canvas</h1>
-                <p>Draw something</p>  -->
                 <canvas id="theCanvas" width="800" height="800" name="theCanvas"></canvas>
         
                 <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
@@ -198,12 +179,13 @@
                         theContext.stroke();
                         }
                     }
-                    //# sourceURL=pen.js
             </script>
                 
             <!-- end cited code from: https://codepen.io/zxlee618/pen/XPVKvg -->
 
 
+
+            <!-- function for downloading the canvas for use later -->
             <script>
                 function downloadCanvasAsImage() {
                     
@@ -225,23 +207,12 @@
     
                 }
     
-                // image processing to create the pattern
-                function writePattern() {
-                    console.log("Hello");
-                    downloadCanvasAsImage();
-                }
-    
-    
                 </script>
-
-            <!-- <button onclick="createTxt(patternTitle,needleSize,yarnWeight,stitchesPerInch,rowsPerInch)">take screenshot</button> -->
-
-
-            <!-- <a href="/download">download</a> -->
 
             <div></div>
 
-            <input onclick="writePattern()" type="submit" value="Submit">
+            <!-- submit button for form calls the download function -->
+            <input onclick="downloadCanvasAsImage()" type="submit" value="Submit">
 
 
             </form>

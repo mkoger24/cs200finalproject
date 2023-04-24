@@ -81,3 +81,6 @@ function downloadCanvasAsImage() {
   tempLink.click();
   document.body.removeChild(tempLink);
 }
+
+
+// end sourced code from https://codepen.io/zxlee618/pen/XPVKvg
